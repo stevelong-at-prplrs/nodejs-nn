@@ -1,0 +1,16 @@
+{
+  "name": "jsnn",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "and": "node nn.js logical-AND-model.json two-value-inputs.json logical-AND-assertions.json",
+    "or": "node nn.js logical-OR-model.json two-value-inputs.json logical-OR-assertions.json",
+    "nor": "node nn.js logical-NOR-model.json two-value-inputs.json logical-NOR-assertions.json",
+    "xor": "node nn.js logical-XOR-model.json two-value-inputs.json logical-XOR-assertions.json",
+    "if": "node nn.js logical-IF-model.json two-value-inputs.json logical-IF-assertions.json",
+    "iff": "node nn.js logical-IFF-model.json two-value-inputs.json logical-IFF-assertions.json",
+    "not": "node nn.js logical-NOT-model.json single-value-inputs.json logical-NOT-assertions.json"
+  }
+}
