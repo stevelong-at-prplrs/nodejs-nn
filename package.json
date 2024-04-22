@@ -5,12 +5,19 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "and": "node nn.js logical-AND-model.json two-value-inputs.json logical-AND-assertions.json",
-    "or": "node nn.js logical-OR-model.json two-value-inputs.json logical-OR-assertions.json",
-    "nor": "node nn.js logical-NOR-model.json two-value-inputs.json logical-NOR-assertions.json",
-    "xor": "node nn.js logical-XOR-model.json two-value-inputs.json logical-XOR-assertions.json",
-    "if": "node nn.js logical-IF-model.json two-value-inputs.json logical-IF-assertions.json",
-    "iff": "node nn.js logical-IFF-model.json two-value-inputs.json logical-IFF-assertions.json",
-    "not": "node nn.js logical-NOT-model.json single-value-inputs.json logical-NOT-assertions.json"
+    "test": "node nn-test.js",
+    "ca": "node cellular-automata.js",
+    "ca:30": "yarn ca rule-30-model.json ca-input.json 60",
+    "ca:110": "yarn ca rule-110-model.json ca-input-2.json 60",
+    "and": "yarn test logical-AND-model.json two-value-inputs.json logical-AND-assertions.json",
+    "nand": "yarn test logical-NAND-model.json two-value-inputs.json logical-NAND-assertions.json",
+    "or": "yarn test logical-OR-model.json two-value-inputs.json logical-OR-assertions.json",
+    "nor": "yarn test logical-NOR-model.json two-value-inputs.json logical-NOR-assertions.json",
+    "xor": "yarn test logical-XOR-model.json two-value-inputs.json logical-XOR-assertions.json",
+    "if": "yarn test logical-IF-model.json two-value-inputs.json logical-IF-assertions.json",
+    "iff": "yarn test logical-IFF-model.json two-value-inputs.json logical-IFF-assertions.json",
+    "not": "yarn test logical-NOT-model.json single-value-inputs.json logical-NOT-assertions.json",
+    "30": "yarn test rule-30-model.json three-value-inputs.json rule-30-assertions.json",
+    "110": "yarn test rule-110-model.json three-value-inputs.json rule-110-assertions.json"
   }
 }
