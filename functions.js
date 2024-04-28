@@ -13,6 +13,8 @@ const logOutput = verbose ? (input, layerIndex) => (acc, curr, i) => {
         console.log("\t_____________\n");
 } : undefined;
 
+export const printArray = (arr) => console.log(arr.map(x => x ? "✺" : " ").join(""));
+
 export const computeNetworkOutput = (network, input) => network.reduce((input, layer, layerIndex) => calculateLayerOutput(layer, input, layerIndex, logOutput), input).map(total => total > threshold ? 1 : 0);
 
 export const calculateLayerOutput = (layer, input, layerIndex, cb) => {

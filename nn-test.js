@@ -3,16 +3,16 @@ import { exit } from 'process';
 import { assert, computeNetworkOutput } from './functions.js';
 
 const commandLineArgs = process.argv.slice(2);
-const modelFileName = commandLineArgs[0];
+const networkFileName = commandLineArgs[0];
 const inputsFileName = commandLineArgs[1];
 const assertionsFileName = commandLineArgs[2];
 
-if (modelFileName && inputsFileName && assertionsFileName) {
+if (networkFileName && inputsFileName && assertionsFileName) {
     console.log();
     try {
-        const modelStr = fs.readFileSync("./models/" + modelFileName, 'utf8');
-        if (!modelStr) {
-            console.error("Model file is empty");
+        const networkStr = fs.readFileSync("./networks/" + networkFileName, 'utf8');
+        if (!networkStr) {
+            console.error("Network file is empty");
             exit(1);
         }
         const inputsStr = fs.readFileSync("./inputs/" + inputsFileName, 'utf8');
@@ -26,8 +26,8 @@ if (modelFileName && inputsFileName && assertionsFileName) {
             exit(1);
         }
 
-        const model = JSON.parse(modelStr);
-        console.log("Model loaded successfully");
+        const network = JSON.parse(networkStr);
+        console.log("Network loaded successfully");
         
         const inputs = JSON.parse(inputsStr);
         if (inputs.length === 0) {
@@ -46,7 +46,7 @@ if (modelFileName && inputsFileName && assertionsFileName) {
         inputs.forEach((input, i) => {
             console.log(`\n\tTest ${i}\n`);
             console.log(`\tInput:\t\t`, input);
-            const output = computeNetworkOutput(model, input);
+            const output = computeNetworkOutput(network, input);
             const assertionResult = assert(assertions[i], output);
             if (assertionResult === 0) {
                 console.log("\n\t********* Test passed *********\n");
@@ -56,7 +56,7 @@ if (modelFileName && inputsFileName && assertionsFileName) {
             
         });
     } catch (e) {
-        console.error("Error reading model file: ", e);
+        console.error("Error reading network file: ", e);
         exit(1);
     }
 }
