@@ -1,4 +1,6 @@
-import { computeNetworkOutput, loadInputs, loadNetwork, printArray } from './functions.js';
+// Description: This script runs a cellular automata simulation using a network and inputs provided by the user. This file is an alternate entry point for using the runCa function from functions.js.
+
+import { loadInputs, loadNetwork, runCa } from './functions.js';
 
 const commandLineArgs = process.argv.slice(2);
 
@@ -12,13 +14,4 @@ if (!networkFilename || !inputsFilename || !numberOfRepetitions) {
 const network = loadNetwork(networkFilename);
 let inputs = loadInputs(inputsFilename);
 
-if (network && inputs) {
-    for (let i = 0; i < numberOfRepetitions; i++) {
-        printArray(inputs);
-        inputs = inputs.map((input, i, arr) => {
-            const caInput = [arr[i - 1] ?? 0, input, arr[i + 1] ?? 0];
-            const output = computeNetworkOutput(network, caInput)[0];
-            return output;
-        });
-    }
-}
+runCa(network, inputs, numberOfRepetitions);

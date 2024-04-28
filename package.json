@@ -5,8 +5,9 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "test": "node nn-test.js",
-    "ca": "node cellular-automata.js",
+    "main": "node main.js",
+    "test": "yarn main test",
+    "ca": "yarn main ca",
     "ca:30": "yarn ca rule-30-network.json ca-input.json 60",
     "ca:110": "yarn ca rule-110-network.json ca-input-2.json 60",
     "and": "yarn test logical-AND-network.json two-value-inputs.json logical-AND-assertions.json",
