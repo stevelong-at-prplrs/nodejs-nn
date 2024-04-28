@@ -13,6 +13,11 @@ const network = loadNetwork(networkFilename);
 const inputs = loadInputs(inputsFilename);
 const assertions = loadAssertions(assertionsFilename);
 
+if (!network || !inputs || !assertions) {
+    console.error("Error loading network, inputs or assertions");
+    process.exit(1);
+}
+
 inputs.forEach((input, i) => {
     console.log(`\n\tTest ${i}\n`);
     console.log(`\tInput:\t\t`, input);
