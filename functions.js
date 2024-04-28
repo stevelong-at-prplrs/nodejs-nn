@@ -1,19 +1,11 @@
 import fs from "fs";
 
-// functions
+// constants
 
 const threshold = 0;  // threshold for activation
 const verbose = false;
 
-const logOutput = verbose ? (input, layerIndex) => (acc, curr, i) => {
-        console.log("\n\t--------------------------");
-        console.log("\tlayer index: ", layerIndex);
-        console.log("\tnode index: ", i);
-        console.log("\tnode input: ", input[i]);
-        console.log("\tnode weights: ", curr);
-        console.log("\tacc following update: ", acc);
-        console.log("\t--------------------------\n");
-} : undefined;
+// functions
 
 const getFilePath = (type) => {
     const path = (() => {
@@ -38,21 +30,16 @@ const getFilePath = (type) => {
 };
 
 const loadFile = (fileName, type) => fs.readFileSync(getFilePath(type) + '/' + fileName, 'utf8') || (console.error(`${type} file is empty`) && process.exit(1));
-export const fetchInputArrays = (fileNamesAndTypesArray) => fileNamesAndTypesArray.map(([fileName, type]) => JSON.parse(loadFile(fileName, type)));
 
-export const printArray = (arr) => console.log(arr.map(x => x ? "✺" : " ").join(""));
-
-export const computeNetworkOutput = (network, input) => network.reduce((input, layer, layerIndex) => computeLayerOutput(layer, input, layerIndex, logOutput), input).map(total => total > threshold ? 1 : 0);
-
-export const computeLayerOutput = (layer, input, layerIndex, cb) => {
-    if (layer.length !== input.length) throw new Error(`Layer ${layerIndex} has ${layer.length} nodes but input has ${input.length} values`);
-    const logger = cb ? cb(input, layerIndex) : undefined;
-    return Object.values(layer.reduce((acc, curr, i) => {
-        curr.forEach((nw) => acc[nw[0]] = Math.max(-1, (Math.min(1, ((acc[nw[0]] ??  0) + (nw[1] * ((input[i])))) + (nw[2] ?? 0)))));
-        if (logger) logger(acc, curr, i);
-        return acc;
-    }, {}))
-};
+const logOutput = verbose ? (input, layerIndex) => (acc, curr, i) => {
+        console.log("\n\t--------------------------");
+        console.log("\tlayer index: ", layerIndex);
+        console.log("\tnode index: ", i);
+        console.log("\tnode input: ", input[i]);
+        console.log("\tnode weights: ", curr);
+        console.log("\tacc following update: ", acc);
+        console.log("\t--------------------------\n");
+} : undefined;
 
 export const areArraysEqual = (arr1, arr2) => arr1.length === arr2.length && arr1.every((v, i) => v === arr2[i]);
 
@@ -66,7 +53,23 @@ export const assert = (expected, actual) => {
     } else {
         return 0;
     }
-}
+};
+
+export const computeNetworkOutput = (network, input) => network.reduce((input, layer, layerIndex) => computeLayerOutput(layer, input, layerIndex, logOutput), input).map(total => total > threshold ? 1 : 0);
+
+export const computeLayerOutput = (layer, input, layerIndex, cb) => {
+    if (layer.length !== input.length) throw new Error(`Layer ${layerIndex} has ${layer.length} nodes but input has ${input.length} values`);
+    const logger = cb ? cb(input, layerIndex) : undefined;
+    return Object.values(layer.reduce((acc, curr, i) => {
+        curr.forEach((nw) => acc[nw[0]] = Math.max(-1, (Math.min(1, ((acc[nw[0]] ??  0) + (nw[1] * ((input[i])))) + (nw[2] ?? 0)))));
+        if (logger) logger(acc, curr, i);
+        return acc;
+    }, {}))
+};
+
+export const fetchInputArrays = (fileNamesAndTypesArray) => fileNamesAndTypesArray.map(([fileName, type]) => JSON.parse(loadFile(fileName, type)));
+
+export const printArray = (arr) => console.log(arr.map(x => x ? "✺" : " ").join(""));
 
 export const runCa = (network, inputs, numberOfRepetitions) => {
     if (!network || !inputs || !numberOfRepetitions) {
