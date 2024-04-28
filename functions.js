@@ -23,9 +23,9 @@ export const loadAssertions = (fileName) => JSON.parse(loadFile("./assertions/" 
 
 export const printArray = (arr) => console.log(arr.map(x => x ? "✺" : " ").join(""));
 
-export const computeNetworkOutput = (network, input) => network.reduce((input, layer, layerIndex) => calculateLayerOutput(layer, input, layerIndex, logOutput), input).map(total => total > threshold ? 1 : 0);
+export const computeNetworkOutput = (network, input) => network.reduce((input, layer, layerIndex) => computeLayerOutput(layer, input, layerIndex, logOutput), input).map(total => total > threshold ? 1 : 0);
 
-export const calculateLayerOutput = (layer, input, layerIndex, cb) => {
+export const computeLayerOutput = (layer, input, layerIndex, cb) => {
     if (layer.length !== input.length) throw new Error(`Layer ${layerIndex} has ${layer.length} nodes but input has ${input.length} values`);
     const logger = cb ? cb(input, layerIndex) : undefined;
     return Object.values(layer.reduce((acc, curr, i) => {
@@ -83,3 +83,5 @@ export const runTests = (network, inputs, assertions) => {
         
     });
 };
+
+export const useCommandLineArgs = () => process.argv.slice(2);

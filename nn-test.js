@@ -1,10 +1,8 @@
 // Alternate entry point for using runTests function from functions.js
 
-import { loadAssertions, loadInputs, loadNetwork, runTests } from './functions.js';
+import { loadAssertions, loadInputs, loadNetwork, runTests, useCommandLineArgs } from './functions.js';
 
-const commandLineArgs = process.argv.slice(2);
-
-const [networkFilename, inputsFilename, assertionsFilename] = commandLineArgs;
+const [networkFilename, inputsFilename, assertionsFilename] = useCommandLineArgs();
 
 if (!networkFilename || !inputsFilename || !assertionsFilename) {
     console.error("Usage: node nn-test.js <networkFilename> <inputsFilename> <assertionsFilename>");
