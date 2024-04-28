@@ -6,18 +6,32 @@
   "type": "module",
   "scripts": {
     "test": "node nn-test.js",
+    "test2": "node main.js test",
+    "ca2": "node main.js ca",
     "ca": "node cellular-automata.js",
     "ca:30": "yarn ca rule-30-network.json ca-input.json 60",
+    "ca2:30": "yarn ca2 rule-30-network.json ca-input.json 60",
     "ca:110": "yarn ca rule-110-network.json ca-input-2.json 60",
+    "ca2:110": "yarn ca2 rule-110-network.json ca-input-2.json 60",
     "and": "yarn test logical-AND-network.json two-value-inputs.json logical-AND-assertions.json",
+    "and2": "yarn test2 logical-AND-network.json two-value-inputs.json logical-AND-assertions.json",
     "nand": "yarn test logical-NAND-network.json two-value-inputs.json logical-NAND-assertions.json",
+    "nand2": "yarn test2 logical-NAND-network.json two-value-inputs.json logical-NAND-assertions.json",
     "or": "yarn test logical-OR-network.json two-value-inputs.json logical-OR-assertions.json",
+    "or2": "yarn test2 logical-OR-network.json two-value-inputs.json logical-OR-assertions.json",
     "nor": "yarn test logical-NOR-network.json two-value-inputs.json logical-NOR-assertions.json",
+    "nor2": "yarn test2 logical-NOR-network.json two-value-inputs.json logical-NOR-assertions.json",
     "xor": "yarn test logical-XOR-network.json two-value-inputs.json logical-XOR-assertions.json",
+    "xor2": "yarn test2 logical-XOR-network.json two-value-inputs.json logical-XOR-assertions.json",
     "if": "yarn test logical-IF-network.json two-value-inputs.json logical-IF-assertions.json",
+    "if2": "yarn test2 logical-IF-network.json two-value-inputs.json logical-IF-assertions.json",
     "iff": "yarn test logical-IFF-network.json two-value-inputs.json logical-IFF-assertions.json",
+    "iff2": "yarn test2 logical-IFF-network.json two-value-inputs.json logical-IFF-assertions.json",
     "not": "yarn test logical-NOT-network.json single-value-inputs.json logical-NOT-assertions.json",
+    "not2": "yarn test logical-NOT-network.json single-value-inputs.json logical-NOT-assertions.json",
     "30": "yarn test rule-30-network.json three-value-inputs.json rule-30-assertions.json",
-    "110": "yarn test rule-110-network.json three-value-inputs.json rule-110-assertions.json"
+    "30-2": "yarn test2 rule-30-network.json three-value-inputs.json rule-30-assertions.json",
+    "110": "yarn test rule-110-network.json three-value-inputs.json rule-110-assertions.json",
+    "110-2": "yarn test2 rule-110-network.json three-value-inputs.json rule-110-assertions.json"
   }
 }
