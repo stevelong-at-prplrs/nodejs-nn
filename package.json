@@ -17,6 +17,7 @@
     "xor": "yarn test logical-XOR-network.json two-value-inputs.json logical-XOR-assertions.json",
     "if": "yarn test logical-IF-network.json two-value-inputs.json logical-IF-assertions.json",
     "iff": "yarn test logical-IFF-network.json two-value-inputs.json logical-IFF-assertions.json",
+    "iff2": "yarn test logical-IFF-networkV2.json two-value-inputs.json logical-IFF-assertions.json",
     "not": "yarn test logical-NOT-network.json single-value-inputs.json logical-NOT-assertions.json",
     "30": "yarn test rule-30-network.json three-value-inputs.json rule-30-assertions.json",
     "110": "yarn test rule-110-network.json three-value-inputs.json rule-110-assertions.json"
