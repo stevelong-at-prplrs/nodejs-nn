@@ -1,17 +1,25 @@
+import fs from "fs";
+
 // functions
 
 const threshold = 0;  // threshold for activation
 const verbose = false;
 
 const logOutput = verbose ? (input, layerIndex) => (acc, curr, i) => {
-        console.log("\n\t_____________");
+        console.log("\n\t--------------------------");
         console.log("\tlayer index: ", layerIndex);
         console.log("\tnode index: ", i);
         console.log("\tnode input: ", input[i]);
         console.log("\tnode weights: ", curr);
         console.log("\tacc following update: ", acc);
-        console.log("\t_____________\n");
+        console.log("\t--------------------------\n");
 } : undefined;
+
+const loadFile = (fileName, type) => fs.readFileSync(fileName, 'utf8') || (console.error(`${type} file is empty`) && process.exit(1));
+
+export const loadNetwork = (fileName) => JSON.parse(loadFile("./networks/" + fileName, "Network"));
+export const loadInputs = (fileName) => JSON.parse(loadFile("./inputs/" + fileName, "Inputs"));
+export const loadAssertions = (fileName) => JSON.parse(loadFile("./assertions/" + fileName, "Assertions"));
 
 export const printArray = (arr) => console.log(arr.map(x => x ? "✺" : " ").join(""));
 
