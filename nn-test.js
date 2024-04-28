@@ -2,9 +2,16 @@ import { assert, computeNetworkOutput, loadAssertions, loadInputs, loadNetwork }
 
 const commandLineArgs = process.argv.slice(2);
 
-const network = loadNetwork(commandLineArgs[0]);
-const inputs = loadInputs(commandLineArgs[1]);
-const assertions = loadAssertions(commandLineArgs[2]);
+const [networkFilename, inputsFilename, assertionsFilename] = commandLineArgs;
+
+if (!networkFilename || !inputsFilename || !assertionsFilename) {
+    console.error("Usage: node nn-test.js <networkFilename> <inputsFilename> <assertionsFilename>");
+    process.exit(1);
+}
+
+const network = loadNetwork(networkFilename);
+const inputs = loadInputs(inputsFilename);
+const assertions = loadAssertions(assertionsFilename);
 
 inputs.forEach((input, i) => {
     console.log(`\n\tTest ${i}\n`);
