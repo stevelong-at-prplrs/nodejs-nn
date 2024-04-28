@@ -1,3 +1,5 @@
+// Description: This script runs a cellular automata simulation using a network and inputs provided by the user. This file is an alternate entry point for using the runCa function from functions.js.
+
 import { loadInputs, loadNetwork, runCa } from './functions.js';
 
 const commandLineArgs = process.argv.slice(2);

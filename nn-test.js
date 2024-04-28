@@ -1,3 +1,5 @@
+// Alternate entry point for using runTests function from functions.js
+
 import { loadAssertions, loadInputs, loadNetwork, runTests } from './functions.js';
 
 const commandLineArgs = process.argv.slice(2);
