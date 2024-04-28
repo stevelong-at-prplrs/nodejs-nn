@@ -3,23 +3,27 @@
 const threshold = 0;  // threshold for activation
 const verbose = false;
 
-// TODO: ensure that the the length of the input matches the number of input nodes in each layer (model validity check)
-
-export const computeNetworkOutput = (model, input) => model.reduce((input, layer, layerIndex) => calculateLayerOutput(layer, input, layerIndex), input).map(total => total > threshold ? 1 : 0);
-
-export const calculateLayerOutput = (layer, input, layerIndex) => Object.values(layer.reduce((acc, curr, i) => {
-    curr.forEach((nw) => acc[nw[0]] = Math.max(-1, (Math.min(1, ((acc[nw[0]] ??  0) + (nw[1] * ((input[i])))) + (nw[2] ?? 0)))));
-    if (verbose) {
+const logOutput = verbose ? (input, layerIndex) => (acc, curr, i) => {
         console.log("\n\t_____________");
-        console.log("\tLayer: ", layerIndex);
-        console.log("\tLayer Input (not transformed): ", input);
-        console.log("\tNode Index: ", i);
-        console.log("\tCurrent Node value: ", curr);
-        console.log("\tAcc: ", acc);
+        console.log("\tlayer index: ", layerIndex);
+        console.log("\tnode index: ", i);
+        console.log("\tnode input: ", input[i]);
+        console.log("\tnode weights: ", curr);
+        console.log("\tacc following update: ", acc);
         console.log("\t_____________\n");
-    }
-    return acc;
-}, {}));
+} : undefined;
+
+export const computeNetworkOutput = (network, input) => network.reduce((input, layer, layerIndex) => calculateLayerOutput(layer, input, layerIndex, logOutput), input).map(total => total > threshold ? 1 : 0);
+
+export const calculateLayerOutput = (layer, input, layerIndex, cb) => {
+    if (layer.length !== input.length) throw new Error(`Layer ${layerIndex} has ${layer.length} nodes but input has ${input.length} values`);
+    const logger = cb ? cb(input, layerIndex) : undefined;
+    return Object.values(layer.reduce((acc, curr, i) => {
+        curr.forEach((nw) => acc[nw[0]] = Math.max(-1, (Math.min(1, ((acc[nw[0]] ??  0) + (nw[1] * ((input[i])))) + (nw[2] ?? 0)))));
+        if (logger) logger(acc, curr, i);
+        return acc;
+    }, {}))
+};
 
 export const areArraysEqual = (arr1, arr2) => arr1.length === arr2.length && arr1.every((v, i) => v === arr2[i]);
 
