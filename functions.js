@@ -92,8 +92,6 @@ export const runTests = (network, inputs, assertions) => {
         process.exit(1);
     }
 
-    console.log({network, inputs, assertions})
-    
     inputs.forEach((input, i) => {
         console.log(`\n\tTest ${i}\n`);
         console.log(`\tInput:\t\t`, input);
