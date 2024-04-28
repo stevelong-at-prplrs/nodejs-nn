@@ -1,14 +1,13 @@
 import { loadAssertions, loadInputs, loadNetwork, runCa, runTests } from './functions.js';
 
 const commandLineArgs = process.argv.slice(2);
-const runType = commandLineArgs.shift();
+const [runType, networkFilename, inputsFilename, thirdCommandLineParam] = commandLineArgs;
 
-if (!runType) {
+if (!runType || !networkFilename || !inputsFilename || !thirdCommandLineParam) {
     console.error("Usage: node main.js <test|ca> <networkFilename> <inputsFilename> <assertionsFilename|numberOfRepetitions>");
     process.exit(1);
 }
 
-const [networkFilename, inputsFilename, thirdCommandLineParam] = commandLineArgs;
 
 const network = loadNetwork(networkFilename);
 const inputs = loadInputs(inputsFilename);
