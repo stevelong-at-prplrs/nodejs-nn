@@ -1,4 +1,4 @@
-import { loadAssertions, loadInputs, loadNetwork, runCa, runTests, useCommandLineArgs } from './functions.js';
+import { fetchInputArrays, runCa, runTests, useCommandLineArgs } from './functions.js';
 
 const [runType, networkFilename, inputsFilename, thirdCommandLineParam] = useCommandLineArgs();
 
@@ -7,13 +7,12 @@ if (!runType || !networkFilename || !inputsFilename || !thirdCommandLineParam) {
     process.exit(1);
 }
 
-const network = loadNetwork(networkFilename);
-const inputs = loadInputs(inputsFilename);
+const generations = parseInt(thirdCommandLineParam);
+const fileTuples = [[networkFilename, "Network"], [inputsFilename, "Inputs"], isNaN(generations) ? [thirdCommandLineParam, "Assertions"] : undefined];
+const [network, inputs, assertions] = fetchInputArrays(fileTuples.filter((file) => file));
 
 if (runType === "test") {
-    const assertions = loadAssertions(thirdCommandLineParam);
     runTests(network, inputs, assertions);
 } else if (runType === "ca") {
-    const numberOfRepetitions = thirdCommandLineParam;
-    runCa(network, inputs, numberOfRepetitions);
+    runCa(network, inputs, generations);
 } else process.exit(1);

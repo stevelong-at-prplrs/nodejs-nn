@@ -15,11 +15,30 @@ const logOutput = verbose ? (input, layerIndex) => (acc, curr, i) => {
         console.log("\t--------------------------\n");
 } : undefined;
 
-const loadFile = (fileName, type) => fs.readFileSync(fileName, 'utf8') || (console.error(`${type} file is empty`) && process.exit(1));
+const getFilePath = (type) => {
+    const path = (() => {
+        switch (type) {
+            case "Network":
+                return "./networks";
+            case "Inputs":
+                return "./inputs";
+            case "Assertions":
+                return "./assertions";
+            default:
+                console.error(`Type ${type} is not valid`);
+                process.exit(1);
+        }
+    
+    })();
+    if (!fs.existsSync(path)) {
+        console.error(`Path ${path} does not exist`);
+        process.exit(1);
+    }
+    return path;
+};
 
-export const loadNetwork = (fileName) => JSON.parse(loadFile("./networks/" + fileName, "Network"));
-export const loadInputs = (fileName) => JSON.parse(loadFile("./inputs/" + fileName, "Inputs"));
-export const loadAssertions = (fileName) => JSON.parse(loadFile("./assertions/" + fileName, "Assertions"));
+const loadFile = (fileName, type) => fs.readFileSync(getFilePath(type) + '/' + fileName, 'utf8') || (console.error(`${type} file is empty`) && process.exit(1));
+export const fetchInputArrays = (fileNamesAndTypesArray) => fileNamesAndTypesArray.map(([fileName, type]) => JSON.parse(loadFile(fileName, type)));
 
 export const printArray = (arr) => console.log(arr.map(x => x ? "✺" : " ").join(""));
 
@@ -69,6 +88,8 @@ export const runTests = (network, inputs, assertions) => {
         console.error("Error loading network, inputs or assertions");
         process.exit(1);
     }
+
+    console.log({network, inputs, assertions})
     
     inputs.forEach((input, i) => {
         console.log(`\n\tTest ${i}\n`);
