@@ -19,10 +19,3 @@ if (runType === "test") {
     const numberOfRepetitions = thirdCommandLineParam;
     runCa(network, inputs, numberOfRepetitions);
 } else process.exit(1);
-
-// main process:
-// 1. load the network, inputs and assertions or cellular automata inputs according to the command line arguments
-// 2. run the cellular automata or neural network tests
-// 3. print the results
-// 4. exit the process
-//
