@@ -1,6 +1,4 @@
-import { runCa } from './cellular-automataV2.js';
-import { loadAssertions, loadInputs, loadNetwork } from './functions.js';
-import { runTests } from './nn-testV2.js';
+import { loadAssertions, loadInputs, loadNetwork, runCa, runTests } from './functions.js';
 
 const commandLineArgs = process.argv.slice(2);
 const runType = commandLineArgs.shift();
