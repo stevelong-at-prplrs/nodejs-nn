@@ -50,6 +50,10 @@ export const assert = (expected, actual) => {
 }
 
 export const runCa = (network, inputs, numberOfRepetitions) => {
+    if (!network || !inputs || !numberOfRepetitions) {
+        console.error("Error loading network, inputs or numberOfRepetitions");
+        process.exit(1);
+    }
     for (let i = 0; i < numberOfRepetitions; i++) {
         printArray(inputs);
         inputs = inputs.map((input, i, arr) => {
@@ -61,10 +65,10 @@ export const runCa = (network, inputs, numberOfRepetitions) => {
 };
 
 export const runTests = (network, inputs, assertions) => {
-    // if (!network || !inputs || !assertions) {
-    //     console.error("Error loading network, inputs or assertions");
-    //     process.exit(1);
-    // }
+    if (!network || !inputs || !assertions) {
+        console.error("Error loading network, inputs or assertions");
+        process.exit(1);
+    }
     
     inputs.forEach((input, i) => {
         console.log(`\n\tTest ${i}\n`);
