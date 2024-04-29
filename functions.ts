@@ -1,4 +1,4 @@
-import fs from "fs";
+import * as fs from "fs";
 import { InputArrayType, Layer, LayerInputArray, NNNode, NeuralNetwork, NodeWeight } from "./types";
 
 // constants
@@ -30,7 +30,14 @@ const getFilePath = (type: InputArrayType) => {
     return path;
 };
 
-const loadFile = (fileNameStr: string, type: InputArrayType) => fs.readFileSync(getFilePath(type) + '/' + fileNameStr, 'utf8') || (console.error(`${type} file is empty`) && process.exit(1));
+const loadFile = (fileNameStr: string, type: InputArrayType) => {
+    const fileContent = fs.readFileSync(getFilePath(type) + '/' + fileNameStr, 'utf8');
+    if (!fileContent) {
+        console.error(`${type} file is empty`);
+        process.exit(1);
+    }
+    return fileContent;
+};
 
 const logOutput = verbose ? (input: LayerInputArray, layerIndex: number) => (acc: LayerInputArray, curr: NNNode, i: number) => {
         console.log("\n\t--------------------------");
@@ -58,7 +65,7 @@ export const assert = (expected: any[], actual: any[]) => {
 
 export const computeNetworkOutput = (network: NeuralNetwork, input: LayerInputArray) => network.reduce((input, layer, layerIndex) => computeLayerOutput(layer, input, layerIndex, logOutput), input).map(total => total > threshold ? 1 : 0);
 
-export const computeLayerOutput = (layer: Layer, input: LayerInputArray, layerIndex: number, cb: Function) => {
+export const computeLayerOutput = (layer: Layer, input: LayerInputArray, layerIndex: number, cb: ((input: LayerInputArray, layerIndex: number) => (acc: LayerInputArray, curr: NNNode, i: number) => void) | undefined) => {
     if (layer.length !== input.length) throw new Error(`Layer ${layerIndex} has ${layer.length} nodes but input has ${input.length} values`);
     const logger = cb ? cb(input, layerIndex) : undefined;
     return Object.values(layer.reduce((acc, curr, i) => {
