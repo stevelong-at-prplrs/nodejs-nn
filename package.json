@@ -21,7 +21,7 @@
     "iff": "yarn test logical-IFF-network.json two-value-inputs.json logical-IFF-assertions.json",
     "iff2": "yarn test logical-IFF-networkV2.json two-value-inputs.json logical-IFF-assertions.json",
     "not": "yarn test logical-NOT-network.json single-value-inputs.json logical-NOT-assertions.json",
-    "ts": "tsc --noEmit --skipLibCheck",
+    "ts": "tsc --noEmit",
     "ts-compile": "tsc *.ts --skipLibCheck"
   },
   "dependencies": {
