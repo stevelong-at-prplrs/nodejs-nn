@@ -1,6 +1,6 @@
 // Description: This script runs a cellular automata simulation using a network and inputs provided by the user. This file is an alternate entry point for using the runCa function from functions.js.
 
-import { fetchInputArrays, runCa, useCommandLineArgs } from './functions.js';
+import { fetchInputArrays, runCa, useCommandLineArgs } from './functions';
 
 const [networkFilename, inputsFilename, numberOfRepetitions] = useCommandLineArgs();
 

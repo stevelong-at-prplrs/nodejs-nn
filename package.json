@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "main.js",
   "license": "MIT",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
+    "30": "yarn test rule-30-network.json three-value-inputs.json rule-30-assertions.json",
+    "110": "yarn test rule-110-network.json three-value-inputs.json rule-110-assertions.json",
     "main": "node main.js",
     "test": "yarn main test",
     "ca": "yarn main ca",
@@ -19,7 +21,13 @@
     "iff": "yarn test logical-IFF-network.json two-value-inputs.json logical-IFF-assertions.json",
     "iff2": "yarn test logical-IFF-networkV2.json two-value-inputs.json logical-IFF-assertions.json",
     "not": "yarn test logical-NOT-network.json single-value-inputs.json logical-NOT-assertions.json",
-    "30": "yarn test rule-30-network.json three-value-inputs.json rule-30-assertions.json",
-    "110": "yarn test rule-110-network.json three-value-inputs.json rule-110-assertions.json"
+    "ts": "tsc --noEmit",
+    "ts-compile": "tsc *.ts --skipLibCheck"
+  },
+  "dependencies": {
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7"
   }
 }

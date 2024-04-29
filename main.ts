@@ -1,4 +1,5 @@
-import { fetchInputArrays, runCa, runTests, useCommandLineArgs } from './functions.js';
+import { fetchInputArrays, runCa, runTests, useCommandLineArgs } from './functions';
+import { InputArrayType } from './types.js';
 
 const [runType, networkFilename, inputsFilename, thirdCommandLineParam] = useCommandLineArgs();
 
@@ -8,8 +9,8 @@ if (!runType || !networkFilename || !inputsFilename || !thirdCommandLineParam) {
 }
 
 const generations = parseInt(thirdCommandLineParam);
-const fileTuples = [[networkFilename, "Network"], [inputsFilename, "Inputs"], isNaN(generations) ? [thirdCommandLineParam, "Assertions"] : undefined];
-const [network, inputs, assertions] = fetchInputArrays(fileTuples.filter((file) => file));
+const fileTuples = [[networkFilename, "Network"], [inputsFilename, "Inputs"], isNaN(generations) ? [thirdCommandLineParam, "Assertions"] : undefined].filter((tuple) => tuple !== undefined) as [string, InputArrayType][];
+const [network, inputs, assertions] = fetchInputArrays(fileTuples);
 
 if (runType === "test") {
     runTests(network, inputs, assertions);
