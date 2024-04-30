@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import { InputArrayType, Layer, LayerInputArray, NNNode, NeuralNetwork, NodeWeight } from "./types";
+import { InputArrayType, Layer, LayerInputArray, NNNode, NeuralNetwork, NodeWeight } from "./types.js";
 
 // constants
 
@@ -115,3 +115,5 @@ export const runTests = (network: NeuralNetwork, inputs: LayerInputArray[], asse
 };
 
 export const useCommandLineArgs = () => process.argv.slice(2);
+
+// module.exports = { fetchInputArrays, runTests, useCommandLineArgs };

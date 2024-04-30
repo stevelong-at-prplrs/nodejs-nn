@@ -1,4 +1,4 @@
-import { fetchInputArrays, runCa, runTests, useCommandLineArgs } from './functions';
+import { fetchInputArrays, runCa, runTests, useCommandLineArgs } from './functions.js';
 import { InputArrayType } from './types.js';
 
 const [runType, networkFilename, inputsFilename, thirdCommandLineParam] = useCommandLineArgs();

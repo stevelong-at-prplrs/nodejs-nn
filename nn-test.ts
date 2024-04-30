@@ -1,6 +1,6 @@
 // Alternate entry point for using runTests function
 
-import { fetchInputArrays, runTests, useCommandLineArgs } from './functions';
+import { fetchInputArrays, runTests, useCommandLineArgs } from './functions.js';
 
 const [networkFilename, inputsFilename, assertionsFilename] = useCommandLineArgs();
 
