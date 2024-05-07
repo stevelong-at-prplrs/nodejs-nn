@@ -1,0 +1,33 @@
+{
+    "assertions": [
+        "logical-AND-assertions.json",
+        "logical-OR-assertions.json",
+        "logical-XOR-assertions.json",
+        "logical-NOT-assertions.json",
+        "logical-NAND-assertions.json",
+        "logical-NOR-assertions.json",
+        "logical-IF-assertions.json",
+        "logical-IFF-assertions.json",
+        "rule-30-assertions.json",
+        "rule-110-assertions.json"
+    ],
+    "inputs": [
+        "single-value-inputs.json",
+        "two-value-inputs.json",
+        "three-value-inputs.json",
+        "ca-input.json",
+        "ca-input-2.json"
+    ],
+    "networks": [
+        "logical-AND-network.json",
+        "logical-OR-network.json",
+        "logical-XOR-network.json",
+        "logical-NOT-network.json",
+        "logical-NAND-network.json",
+        "logical-NOR-network.json",
+        "logical-IF-network.json",
+        "logical-IFF-network.json",
+        "rule-30-network.json",
+        "rule-110-network.json"
+    ]
+}
