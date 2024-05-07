@@ -12,7 +12,7 @@ export type LayerInputArray = number[];
 
 export type NeuralNetwork = Layer[];
 
-export type InputArrayType = "Network" | "Inputs" | "Assertions";
+export type InputArrayType = "Manifest" | "Network" | "Inputs" | "Assertions";
 
 // type ActivationFunction = (x: number) => number;
 

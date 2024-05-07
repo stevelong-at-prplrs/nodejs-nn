@@ -11,6 +11,8 @@ const verbose = false;
 const getFilePath = (type: InputArrayType) => {
     const path = (() => {
         switch (type) {
+            case "Manifest":
+                return ".";
             case "Network":
                 return "./networks";
             case "Inputs":
@@ -77,6 +79,8 @@ export const computeLayerOutput = (layer: Layer, input: LayerInputArray, layerIn
 
 export const fetchInputArrays = (fileNamesAndTypesArray: [string, InputArrayType][]) => fileNamesAndTypesArray.map(([fileName, type]) => JSON.parse(loadFile(fileName, type) ?? ""));
 
+export const fetchFileManifest = (fileName: string): {networks: string[], inputs: string[], assertions: string[]} => JSON.parse(loadFile(fileName, "Manifest") ?? "");
+
 export const printArray = (arr: LayerInputArray) => console.log(arr.map(x => x ? "✺" : " ").join(""));
 
 export const runCa = (network: NeuralNetwork, inputs: LayerInputArray, numberOfRepetitions: number) => {
@@ -116,4 +120,12 @@ export const runTests = (network: NeuralNetwork, inputs: LayerInputArray[], asse
 
 export const useCommandLineArgs = () => process.argv.slice(2);
 
-// module.exports = { fetchInputArrays, runTests, useCommandLineArgs };
+export const useClosureVar = (initialValue: any): [() => any, (value: any) => void] => {
+    let closureVar = initialValue;
+    return [
+        () => closureVar,
+        (value: any) => closureVar = value
+    ];
+}
+
+export const clearConsole = () => process.stdout.write('\x1Bc'); // clear console. Works better cross-platform than console.clear()

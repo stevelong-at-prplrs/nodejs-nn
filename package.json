@@ -8,6 +8,7 @@
     "30": "yarn test rule-30-network.json three-value-inputs.json rule-30-assertions.json",
     "110": "yarn test rule-110-network.json three-value-inputs.json rule-110-assertions.json",
     "main": "ts-node main.ts",
+    "interactive": "ts-node interactive.ts",
     "test": "yarn main test",
     "ca": "yarn main ca",
     "ca:30": "yarn ca rule-30-network.json ca-input.json 60",
@@ -24,6 +25,7 @@
     "ts": "tsc --noEmit"
   },
   "dependencies": {
+    "@inquirer/select": "^2.3.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   },
